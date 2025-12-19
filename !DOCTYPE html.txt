@@ -159,9 +159,42 @@
   </section>
 
   <section id="join">
-    <h2>Become Part of the World</h2>
-    <p>Connect. Grow. Serve continents. Unlock your destiny.</p>
+    <h2>Your Player Progress</h2>
+    <p>Level up by exploring continents and connecting people.</p>
+
+    <div class="card">
+      <p><strong>Level:</strong> <span id="level">1</span></p>
+      <p><strong>Talents Unlocked:</strong> <span id="talents">None</span></p>
+      <button onclick="gainXP()">Explore a Continent</button>
+      <button onclick="checkMaldives()">Attempt Maldives Entry</button>
+      <p id="message"></p>
+    </div>
   </section>
+
+  <script>
+    let level = 1;
+    let talents = [];
+
+    function gainXP() {
+      level++;
+      document.getElementById('level').innerText = level;
+
+      if (level === 3) talents.push('Empathy');
+      if (level === 5) talents.push('Leadership');
+      if (level === 7) talents.push('Unity');
+
+      document.getElementById('talents').innerText = talents.join(', ') || 'None';
+      document.getElementById('message').innerText = 'You explored a new region and grew stronger.';
+    }
+
+    function checkMaldives() {
+      if (level >= 7 && talents.length >= 3) {
+        document.getElementById('message').innerText = 'Access granted! Welcome to the Maldives Valentine Event ❤️';
+      } else {
+        document.getElementById('message').innerText = 'Access denied. Grow more and connect all continents first.';
+      }
+    }
+  </script>
 
   <footer>
     <p>© WorldLink Universe – Connecting Humanity Through Play</p>
