@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WorldLink – A Global Action Adventure</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0f172a;
+      color: #e5e7eb;
+    }
+    header {
+      padding: 20px;
+      background: linear-gradient(90deg, #1e3a8a, #0f766e);
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    header p {
+      opacity: 0.9;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      background: #020617;
+      padding: 10px;
+    }
+    nav a {
+      color: #93c5fd;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      color: #22d3ee;
+    }
+    section {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease;
+      padding: 60px 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: #020617;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+    .card h3 {
+      margin-top: 0;
+      color: #38bdf8;
+    }
+    .valentine {
+      background: linear-gradient(135deg, #831843, #be123c);
+      border-radius: 24px;
+      padding: 40px;
+      text-align: center;
+    }
+    footer {
+      text-align: center;
+      padding: 30px;
+      background: #020617;
+      opacity: 0.8;
+    }
+    </style>
+  <script>
+    // Smooth scroll for navigation
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          const target = document.querySelector(link.getAttribute('href'));
+          target.scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+
+      // Simple reveal animation
+      const sections = document.querySelectorAll('section');
+      const reveal = () => {
+        sections.forEach(sec => {
+          const rect = sec.getBoundingClientRect();
+          if (rect.top < window.innerHeight - 100) {
+            sec.style.opacity = 1;
+            sec.style.transform = 'translateY(0)';
+          }
+        });
+      };
+      window.addEventListener('scroll', reveal);
+      reveal();
+    });
+  </script>
+</head>
+<body>
+
+  <header>
+    <h1>WorldLink</h1>
+    <p>An Action‑Adventure Game Connecting Every Continent</p>
+  </header>
+
+  <nav>
+    <a href="#world">World</a>
+    <a href="#continents">Continents</a>
+    <a href="#villains">Villains</a>
+    <a href="#valentine">Valentine Event</a>
+    <a href="#join">Join</a>
+  </nav>
+
+  <section id="world">
+    <h2>The Vision</h2>
+    <p>
+      WorldLink is a realistic action‑adventure experience where players travel
+      across the globe, solve meaningful puzzles, build relationships, and
+      connect cultures. Your choices define your path toward becoming the one
+      true savior.
+    </p>
+  </section>
+
+  <section id="continents">
+    <h2>Continents & Special Identity</h2>
+    <div class="card-grid">
+      <div class="card"><h3>Africa</h3><p>Community strength, wildlife quests, rhythm‑based challenges.</p></div>
+      <div class="card"><h3>Asia</h3><p>Wisdom puzzles, balance, ancient traditions and discipline.</p></div>
+      <div class="card"><h3>Europe</h3><p>History‑driven mysteries, architecture, strategic thinking.</p></div>
+      <div class="card"><h3>Americas</h3><p>Innovation, courage, urban‑nature balance challenges.</p></div>
+      <div class="card"><h3>Oceania</h3><p>Exploration, survival, ocean mastery and navigation.</p></div>
+      <div class="card"><h3>Antarctica</h3><p>Endurance, isolation, truth‑seeking trials.</p></div>
+    </div>
+  </section>
+
+  <section id="villains">
+    <h2>The Three Brothers</h2>
+    <div class="card-grid">
+      <div class="card"><h3>The Strategist</h3><p>Controls systems, manipulation, intellect over force.</p></div>
+      <div class="card"><h3>The Enforcer</h3><p>Raw power, fear, dominance through strength.</p></div>
+      <div class="card"><h3>The Silent One</h3><p>Emotionless, psychological warfare, unseen presence.</p></div>
+    </div>
+    <p>Only one player, fully aligned with the world, can defeat them.</p>
+  </section>
+
+  <section id="valentine">
+    <div class="valentine">
+      <h2>Valentine’s Event – Maldives</h2>
+      <p>
+        A hidden paradise. Peaceful, romantic, and rare.
+        Entry requires trust, level mastery, and emotional alignment.
+      </p>
+    </div>
+  </section>
+
+  <section id="join">
+    <h2>Your Player Progress</h2>
+    <p>Level up by exploring continents and connecting people.</p>
+
+    <div class="card">
+      <p><strong>Level:</strong> <span id="level">1</span></p>
+      <p><strong>Talents Unlocked:</strong> <span id="talents">None</span></p>
+      <button onclick="gainXP()">Explore a Continent</button>
+      <button onclick="checkMaldives()">Attempt Maldives Entry</button>
+      <p id="message"></p>
+    </div>
+  </section>
+
+  <script>
+    let level = 1;
+    let talents = [];
+
+    function gainXP() {
+      level++;
+      document.getElementById('level').innerText = level;
+
+      if (level === 3) talents.push('Empathy');
+      if (level === 5) talents.push('Leadership');
+      if (level === 7) talents.push('Unity');
+
+      document.getElementById('talents').innerText = talents.join(', ') || 'None';
+      document.getElementById('message').innerText = 'You explored a new region and grew stronger.';
+    }
+
+    function checkMaldives() {
+      if (level >= 7 && talents.length >= 3) {
+        document.getElementById('message').innerText = 'Access granted! Welcome to the Maldives Valentine Event ❤️';
+      } else {
+        document.getElementById('message').innerText = 'Access denied. Grow more and connect all continents first.';
+      }
+    }
+  </script>
+
+  <footer>
+    <p>© WorldLink Universe – Connecting Humanity Through Play</p>
+  </footer>
+
+</body>
+</html>
